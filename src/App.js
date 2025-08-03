@@ -23,7 +23,12 @@ import { setUserRole, setUserName, setAuthenticated, setHasAnswered, setKickedOu
 import { setMessages, addMessage } from "./store/slices/chatSlice"
 import "./App.css"
 
-const socket = io("http://localhost:5000")
+// Socket connection with environment variable support
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || "http://localhost:5000"
+const socket = io(SOCKET_URL, {
+  transports: ['websocket', 'polling'],
+  withCredentials: true
+})
 
 function AppContent() {
   const dispatch = useDispatch()

@@ -109,9 +109,11 @@ A real-time polling system built with React and Socket.io for the Intervue.io SD
 
 ## Deployment Ready
 
-The application is ready for deployment on platforms like:
-- Frontend: Vercel, Netlify
-- Backend: Heroku, Railway, Render
+The application is optimized for deployment on:
+- **Frontend**: Vercel (Next.js optimized)
+- **Backend**: Render (Node.js with WebSocket support)
+
+See `VERCEL_RENDER_DEPLOYMENT.md` for detailed deployment instructions.
 
 ## Author
 

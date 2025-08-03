@@ -1,0 +1,47 @@
+#!/bin/bash
+
+echo "🚀 Pooling Engine Deployment Helper"
+echo "=================================="
+
+echo ""
+echo "📋 Prerequisites:"
+echo "1. GitHub repository connected to Vercel and Render"
+echo "2. Environment variables ready"
+echo ""
+
+echo "🔧 Step 1: Deploy Backend to Render"
+echo "   - Go to https://render.com"
+echo "   - Create New Web Service"
+echo "   - Connect your GitHub repo"
+echo "   - Set Root Directory to: server"
+echo "   - Set Build Command to: npm install"
+echo "   - Set Start Command to: npm start"
+echo "   - Add Environment Variables:"
+echo "     NODE_ENV=production"
+echo "     CLIENT_URL=https://your-frontend-domain.vercel.app"
+echo ""
+
+echo "🔧 Step 2: Deploy Frontend to Vercel"
+echo "   - Go to https://vercel.com"
+echo "   - Import your GitHub repo"
+echo "   - Framework: Next.js"
+echo "   - Add Environment Variable:"
+echo "     NEXT_PUBLIC_SOCKET_URL=https://your-backend-url.onrender.com"
+echo ""
+
+echo "🔧 Step 3: Update Backend CORS"
+echo "   - Go back to Render dashboard"
+echo "   - Update CLIENT_URL to match your Vercel domain"
+echo "   - Redeploy backend"
+echo ""
+
+echo "✅ Your app should now be live!"
+echo "   Frontend: https://your-app.vercel.app"
+echo "   Backend: https://your-app.onrender.com"
+echo ""
+
+echo "🧪 Test your deployment:"
+echo "1. Open frontend URL"
+echo "2. Check browser console for WebSocket errors"
+echo "3. Try creating a poll as teacher"
+echo "4. Join as student from another tab" 
