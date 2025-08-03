@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express")
 const http = require("http")
 const socketIo = require("socket.io")
@@ -5,14 +6,25 @@ const cors = require("cors")
 
 const app = express()
 const server = http.createServer(app)
+
+// Environment variables for production
+const PORT = process.env.PORT || 5000
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000"
+const NODE_ENV = process.env.NODE_ENV || "development"
+
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: NODE_ENV === "production" ? CLIENT_URL : ["http://localhost:3000", "http://127.0.0.1:3000"],
     methods: ["GET", "POST"],
+    credentials: true
   },
+  transports: ['websocket', 'polling']
 })
 
-app.use(cors())
+app.use(cors({
+  origin: NODE_ENV === "production" ? CLIENT_URL : ["http://localhost:3000", "http://127.0.0.1:3000"],
+  credentials: true
+}))
 app.use(express.json())
 
 // In-memory storage (in production, use a database)
@@ -183,7 +195,8 @@ app.get("/api/current-poll", (req, res) => {
   res.json(currentPoll)
 })
 
-const PORT = process.env.PORT || 5000
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`)
+  console.log(`Environment: ${NODE_ENV}`)
+  console.log(`Client URL: ${CLIENT_URL}`)
 })
